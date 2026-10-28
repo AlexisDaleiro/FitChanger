@@ -4,15 +4,30 @@ import { DarkTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { expo } from '../app.json';
+import { tokens } from '@/theme/tokens';
 
-// SPEC-GAP: La paleta de navegación predeterminada es provisional hasta las Tareas 2 y 3.
-const scaffoldTheme = {
+const appTheme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    background: expo.backgroundColor,
-    card: expo.backgroundColor,
+    primary: tokens.colors.text.primary,
+    background: tokens.colors.bg.base,
+    card: tokens.colors.bg.base,
+    text: tokens.colors.text.primary,
+    border: tokens.colors.border.subtle,
+    notification: tokens.colors.danger,
+  },
+  fonts: {
+    regular: {
+      ...DarkTheme.fonts.regular,
+      fontFamily: tokens.fontFamily.regular,
+    },
+    medium: { ...DarkTheme.fonts.medium, fontFamily: tokens.fontFamily.medium },
+    bold: { ...DarkTheme.fonts.bold, fontFamily: tokens.fontFamily.semibold },
+    heavy: {
+      ...DarkTheme.fonts.heavy,
+      fontFamily: tokens.fontFamily.displayBold,
+    },
   },
 };
 
@@ -21,7 +36,7 @@ const scaffoldTheme = {
 export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <ThemeProvider value={scaffoldTheme}>
+      <ThemeProvider value={appTheme}>
         <StatusBar style="light" />
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />

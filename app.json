@@ -35,6 +35,18 @@
     "plugins": [
       "expo-router",
       "expo-notifications",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Inter-Regular.otf",
+            "./assets/fonts/Inter-Medium.otf",
+            "./assets/fonts/Inter-SemiBold.otf",
+            "./assets/fonts/InterDisplay-SemiBold.otf",
+            "./assets/fonts/InterDisplay-Bold.otf"
+          ]
+        }
+      ],
       "./plugins/withWindowsCmake"
     ]
   }

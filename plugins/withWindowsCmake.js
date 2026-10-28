@@ -5,6 +5,9 @@ const { withGradleProperties } = require('expo/config-plugins');
 const windowsProperties = {
   'android.cmakeVersion': '3.31.6',
   'expo.android.cmakeObjectPathMax': '240',
+  // SPEC-GAP: La spec no fija ABIs locales; Windows usa x86_64 para el emulador.
+  // Un -PreactNativeArchitectures explícito permite compilar para un teléfono.
+  reactNativeArchitectures: 'x86_64',
 };
 
 function withWindowsCmake(config) {

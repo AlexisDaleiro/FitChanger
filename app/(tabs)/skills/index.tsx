@@ -1,18 +1,33 @@
-import { useTheme } from 'expo-router';
-import { Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useScrollToTop } from 'expo-router';
+import { type ComponentRef, useRef } from 'react';
+import { ScrollView, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+import { useTabBarHeight } from '@/components/navigation/TabBar';
+import { Text } from '@/components/ui/Text';
 import { copy } from '@/copy';
+import { tokens } from '@/theme/tokens';
 
-// SPEC-GAP: Tarea 1 exige Text placeholder; la primitiva Text y sus tokens pertenecen a Tarea 2.
 export default function SkillsScreen() {
-  const { colors } = useTheme();
+  const scrollRef = useRef<ComponentRef<typeof ScrollView>>(null);
+  const insets = useSafeAreaInsets();
+  const tabBarHeight = useTabBarHeight();
+  useScrollToTop(scrollRef);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View className="flex-1 items-center justify-center">
-        <Text style={{ color: colors.text }}>{copy.tabs.skills}</Text>
-      </View>
-    </SafeAreaView>
+    <View className="flex-1 bg-base" style={{ paddingTop: insets.top }}>
+      <ScrollView
+        ref={scrollRef}
+        contentContainerStyle={{
+          paddingTop: tokens.spacing[24],
+          paddingHorizontal: tokens.spacing[20],
+          paddingBottom: tabBarHeight + tokens.spacing[24],
+        }}
+      >
+        <Text variant="display" accessibilityRole="header">
+          {copy.tabs.skills}
+        </Text>
+      </ScrollView>
+    </View>
   );
 }
